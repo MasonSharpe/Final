@@ -47,18 +47,21 @@ public class Orb : MonoBehaviour
             {
                 isConnected = false;
                 cc.enabled = true;
-                rb.velocity = mouseVelocity;
+                rb.velocity *= 2;
             }
             else
             {
                 isConnected = true;
             // cc.enabled = false;
-        }
+            }
         }
         if (isConnected)
         {
-            transform.position = new Vector3(pos.x, pos.y, 0);
-            mouseVelocity = ((Vector2)transform.position - prevPosition1) * orbVelocity;
+            //transform.position = new Vector3(pos.x, pos.y, 0);
+
+            print((Vector2)transform.position - (prevPosition1));
+            mouseVelocity = (Vector2)new Vector3(pos.x, pos.y, 0) - prevPosition1 * orbVelocity;
+            rb.velocity = mouseVelocity;
         }
         else
         {
