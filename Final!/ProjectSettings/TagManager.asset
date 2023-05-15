@@ -11,12 +11,12 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - groundCollider
+  - Enemy
+  - Enemy Bullet
+  - Camera
+  - Camera Edges
   - 
   - 
   - 
