@@ -11,19 +11,23 @@ public class Orb : MonoBehaviour
     CircleCollider2D cc;
     Rigidbody2D cameraRb;
     TrailRenderer tr;
+    GameManager gameManager;
     public float orbVelocity = 5;
     public float movementSpeed = 5;
     public float dashSpeed = 2;
     public int remainingPierce = 0;
     public float health = 20;
     float pierceTimer = 0;
+    public float essence = 6;
+    Vector2 freezePosition;
     void Start()
     {
+        gameManager = GetComponentInParent<GameManager>();
         Cursor.visible = false;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         tr = GetComponent<TrailRenderer>();
-        cameraRb = Camera.main.GetComponent<Rigidbody2D>();
+        cameraRb = Camera.main.GetComponentInParent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -34,8 +38,35 @@ public class Orb : MonoBehaviour
 
     private void Update()
     {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //tell adulmund about prespective camera not working!!!
         pierceTimer -= Time.deltaTime;
+        gameManager.comboLeft -= Time.deltaTime;
+        if (gameManager.comboLeft < 0)
+        {
+            gameManager.combo = 0;
+        }
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            freezePosition = transform.position;
+        }
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            if (essence > 0)
+            {
+                gameManager.slowActive = true;
+                essence -= Time.deltaTime * 3;
+            }
+            else
+            {
+                gameManager.slowActive = false;
+                freezePosition = transform.position;
+            }
+        }
+        else
+        {
+            gameManager.slowActive = false;
+            essence = Mathf.Clamp(essence + Time.deltaTime * (1 + gameManager.combo / 20), 0, 6);
+        }
         if (remainingPierce > 0 && pierceTimer < 0)
         {
             remainingPierce = 0;
@@ -45,6 +76,7 @@ public class Orb : MonoBehaviour
             if (isConnected)
             {
                 isConnected = false;
+                freezePosition = transform.position;
                 cc.enabled = true;
                 rb.velocity *= 2;
                 tr.startColor = Color.red;
@@ -63,7 +95,7 @@ public class Orb : MonoBehaviour
         {
             //transform.position = new Vector3(pos.x, pos.y, 0);
 
-            mouseVelocity = (Vector2)new Vector3(pos.x, pos.y, 0) - (Vector2)transform.position * orbVelocity;
+            mouseVelocity = ((Vector2)new Vector3(pos.x, pos.y, 0) - (Vector2)transform.position * orbVelocity) * (gameManager.slowActive ? 0.1f : 1);
             rb.velocity = mouseVelocity;
         }
         if (!isConnected && remainingPierce > 0)
@@ -75,6 +107,10 @@ public class Orb : MonoBehaviour
             cc.isTrigger = false;
         }
         cameraRb.velocity = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0) * movementSpeed;
+        if (gameManager.slowActive && !isConnected)
+        {
+            transform.position = freezePosition;
+        }
     }
 
 
