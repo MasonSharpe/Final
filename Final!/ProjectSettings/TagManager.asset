@@ -17,9 +17,9 @@ TagManager:
   - Enemy Bullet
   - Camera
   - Camera Edges
-  - 
-  - 
-  - 
+  - ForcedConnected
+  - Ground
+  - PlayerInteract
   - 
   - 
   - 

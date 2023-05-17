@@ -52,7 +52,6 @@ public class Enemy : MonoBehaviour
         if (gameManager.playerInfo.isConnected)
         {
             stunDuration = gameManager.playerInfo.rb.velocity.magnitude < 4 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 4;
-            print(stunDuration);
         }
         else
         {
@@ -60,9 +59,11 @@ public class Enemy : MonoBehaviour
             gameManager.playerInfo.remainingPierce--;
             if (health < 0)
             {
-                Destroy(gameObject);
                 gameManager.combo++;
                 gameManager.comboLeft = 8;
+                gameManager.enemiesKilledInRoom++;
+                gameManager.currentRoom.trySpawnWave();
+                Destroy(gameObject);
             }
         }
     }

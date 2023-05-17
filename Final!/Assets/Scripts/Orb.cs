@@ -12,6 +12,7 @@ public class Orb : MonoBehaviour
     Rigidbody2D cameraRb;
     TrailRenderer tr;
     GameManager gameManager;
+    public LayerMask Connectban;
     public float orbVelocity = 5;
     public float movementSpeed = 5;
     public float dashSpeed = 2;
@@ -38,7 +39,10 @@ public class Orb : MonoBehaviour
 
     private void Update()
     {
-        Vector3 pos = Camera.main.ScreenToWorldPoint(Input.mousePosition); //tell adulmund about prespective camera not working!!!
+        print(cc.IsTouchingLayers(Connectban));
+        Vector3 pos = Input.mousePosition;
+        pos.z = -Camera.main.transform.position.z;
+        pos = Camera.main.ScreenToWorldPoint(pos);
         pierceTimer -= Time.deltaTime;
         gameManager.comboLeft -= Time.deltaTime;
         if (gameManager.comboLeft < 0)
@@ -83,9 +87,16 @@ public class Orb : MonoBehaviour
                 Cursor.visible = true;
                 remainingPierce = (int)Mathf.Round(rb.velocity.magnitude / 8) + 1;
                 pierceTimer = 1 + (remainingPierce * 0.1f);
+                Physics2D.IgnoreLayerCollision(7, 12, true);
+
+               
             }
             else
             {
+                if (!cc.IsTouchingLayers(Connectban))
+                {
+                    Physics2D.IgnoreLayerCollision(7, 12, false);
+                }
                 isConnected = true;
                 tr.startColor = Color.cyan;
                 Cursor.visible = false;
@@ -93,7 +104,6 @@ public class Orb : MonoBehaviour
         }
         if (isConnected)
         {
-            //transform.position = new Vector3(pos.x, pos.y, 0);
 
             mouseVelocity = ((Vector2)new Vector3(pos.x, pos.y, 0) - (Vector2)transform.position * orbVelocity) * (gameManager.slowActive ? 0.1f : 1);
             rb.velocity = mouseVelocity;

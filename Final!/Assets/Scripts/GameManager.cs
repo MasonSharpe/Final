@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public Orb playerInfo;
     public bool slowActive = false;
     public Room currentRoom;
+    public int enemiesKilledInRoom;
     public int combo = 0;
     public float comboLeft;
     void Start()
