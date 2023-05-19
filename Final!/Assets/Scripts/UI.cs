@@ -26,6 +26,9 @@ public class UI : MonoBehaviour
         essence.value = gameManager.playerInfo.essence;
         comboLeft.value = gameManager.comboLeft;
         comboText.text = "Combo: " + gameManager.combo;
-        panel.transform.position = startingPanelPos + (Camera.main.ScreenToWorldPoint(Input.mousePosition) / 2);
+        Vector3 pos = Input.mousePosition;
+        pos.z = -Camera.main.transform.position.z;
+        pos -= new Vector3(Screen.width / 2, Screen.height / 2, 0);
+        panel.transform.position = startingPanelPos + (pos / 60);
     }
 }

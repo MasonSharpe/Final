@@ -56,6 +56,7 @@ public class Enemy : MonoBehaviour
         else
         {
             health -= gameManager.playerInfo.rb.velocity.magnitude;
+            StartCoroutine(Camera.main.gameObject.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
             gameManager.playerInfo.remainingPierce--;
             if (health < 0)
             {
