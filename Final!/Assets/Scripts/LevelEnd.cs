@@ -22,7 +22,8 @@ public class LevelEnd : MonoBehaviour
             gameManager.player.transform.localScale = new Vector3(mult, mult, 1);
             if (shrinkTimer < 0.2f)
             {
-                SceneManager.LoadScene("dsad");
+                gameManager.level++;
+                SceneManager.LoadScene("Level" + gameManager.level);
                 shrinkTimer = 0;
             }
         }

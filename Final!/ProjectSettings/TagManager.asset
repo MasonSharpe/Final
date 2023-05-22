@@ -24,7 +24,7 @@ TagManager:
   - PlayerInteract
   - Destructable
   - ForcedDisconnected
-  - 
+  - EnemyCollision
   - 
   - 
   - 

@@ -84,7 +84,7 @@ public class Orb : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            if (isConnected)
+            if (isConnected && !gcc.IsTouchingLayers(Disconnectban))
             {
                 isConnected = false;
                 freezePosition = transform.position;
@@ -105,12 +105,15 @@ public class Orb : MonoBehaviour
             {
                 if (!gcc.IsTouchingLayers(Connectban))
                 {
-                    Physics2D.IgnoreLayerCollision(7, 12, false);
+                    if (!gcc.IsTouchingLayers(Connectban))
+                    {
+                        Physics2D.IgnoreLayerCollision(7, 12, false);
+                    }
+                    Physics2D.IgnoreLayerCollision(7, 16, true);
+                    isConnected = true;
+                    tr.startColor = Color.cyan;
+                    // Cursor.visible = false;
                 }
-                Physics2D.IgnoreLayerCollision(7, 16, true);
-                isConnected = true;
-                tr.startColor = Color.cyan;
-               // Cursor.visible = false;
             }
         }
         if (isConnected)

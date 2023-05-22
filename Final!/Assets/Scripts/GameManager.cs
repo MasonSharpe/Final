@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public bool slowActive = false;
     public Room currentRoom;
     public int enemiesKilledInRoom;
+    public int level = 0;
     public int combo = 0;
     public float comboLeft;
     void Start()
