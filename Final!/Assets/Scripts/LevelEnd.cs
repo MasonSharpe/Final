@@ -7,6 +7,9 @@ public class LevelEnd : MonoBehaviour
 {
     GameManager gameManager;
     float shrinkTimer = 0;
+
+
+    
     void Start()
     {
         gameManager = GetComponentInParent<GameManager>();
@@ -15,7 +18,7 @@ public class LevelEnd : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shrinkTimer -= Time.deltaTime / 3;
+        shrinkTimer -= gameManager.dTime / 3;
         if (shrinkTimer < 1 && shrinkTimer > 0.1f)
         {
             float mult = (shrinkTimer) * 0.438f;
@@ -27,6 +30,7 @@ public class LevelEnd : MonoBehaviour
                 shrinkTimer = 0;
             }
         }
+
     }
     private void LateUpdate()
     {
@@ -42,9 +46,10 @@ public class LevelEnd : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (shrinkTimer < 0)
+        if (shrinkTimer < 0 && !gameManager.playerInfo.isConnected)
         {
             shrinkTimer = 1;
+            gameManager.playerInfo.hasControl = false;
         }
     }
 }

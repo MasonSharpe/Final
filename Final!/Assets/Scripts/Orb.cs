@@ -19,13 +19,14 @@ public class Orb : MonoBehaviour
     public LayerMask Disconnectban;
     public GameObject cameraMover;
     public float orbVelocity = 10;
-    public float movementSpeed = 5;
+    public float movementSpeed = 5; // add slopes!!
     public float dashSpeed = 2;
     public int remainingPierce = 0;
     public float health = 20;
     float invincTimer = 0;
-    float pierceTimer = 0;
-    public float essence = 6;
+    public float pierceTimer = 0;
+    public float essence = 8;
+    public bool hasControl = true;
     Vector2 freezePosition;
     void Start()
     {
@@ -46,12 +47,14 @@ public class Orb : MonoBehaviour
 
     private void Update()
     {
+        gameManager.levelTime += gameManager.dTime;
+        gameManager.dTime = Time.deltaTime * (gameManager.slowActive ? 0.1f : 1);
         Vector3 pos = Input.mousePosition;
         pos.z = -Camera.main.transform.position.z;
         pos = Camera.main.ScreenToWorldPoint(pos);
-        invincTimer -= Time.deltaTime;
-        pierceTimer -= Time.deltaTime;
-        gameManager.comboLeft -= Time.deltaTime;
+        invincTimer -= gameManager.dTime;
+        pierceTimer -= gameManager.dTime;
+        gameManager.comboLeft -= gameManager.dTime;
         if (gameManager.comboLeft < 0)
         {
             gameManager.combo = 0;
@@ -76,15 +79,15 @@ public class Orb : MonoBehaviour
         else
         {
             gameManager.slowActive = false;
-            essence = Mathf.Clamp(essence + Time.deltaTime * (1 + gameManager.combo / 20), 0, 6);
+            essence = Mathf.Clamp(essence + Time.deltaTime * (1 + gameManager.combo / 20), 0, 8);
         }
         if (remainingPierce > 0 && pierceTimer < 0)
         {
             remainingPierce = 0;
         }
-        if (Input.GetKeyDown(KeyCode.Space))
+        if ((Input.GetKeyDown(KeyCode.Space) || (Input.GetKey(KeyCode.Space) && !isConnected)) && hasControl)
         {
-            if (isConnected && !gcc.IsTouchingLayers(Disconnectban))
+            if (isConnected)
             {
                 isConnected = false;
                 freezePosition = transform.position;
@@ -93,22 +96,16 @@ public class Orb : MonoBehaviour
                 tr.startColor = Color.red;
                 //Cursor.visible = true;
                 remainingPierce = (int)Mathf.Round(rb.velocity.magnitude / 8) + 1;
-                pierceTimer = 1 + (remainingPierce * 0.1f);
+                pierceTimer = 1 + (remainingPierce * 0.2f);
                 Physics2D.IgnoreLayerCollision(7, 12, true);
-                if (!gcc.IsTouchingLayers(Disconnectban))
-                {
-                    Physics2D.IgnoreLayerCollision(7, 16, false);
-                }
+                Physics2D.IgnoreLayerCollision(7, 16, false);
 
             }
             else
             {
-                if (!gcc.IsTouchingLayers(Connectban))
+                if (pierceTimer <= 1)
                 {
-                    if (!gcc.IsTouchingLayers(Connectban))
-                    {
-                        Physics2D.IgnoreLayerCollision(7, 12, false);
-                    }
+                    Physics2D.IgnoreLayerCollision(7, 12, false);
                     Physics2D.IgnoreLayerCollision(7, 16, true);
                     isConnected = true;
                     tr.startColor = Color.cyan;
@@ -143,6 +140,7 @@ public class Orb : MonoBehaviour
         if (collision.gameObject.layer == 9)
         {
             takeDamage(4);
+            Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Damaging")
         {
@@ -155,6 +153,7 @@ public class Orb : MonoBehaviour
         if (invincTimer < 0)
         {
             health -= amount;
+            gameManager.comboLeft -= 3;
             invincTimer = 0.5f;
             if (health <= 0)
             {

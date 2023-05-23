@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9081520285634786230}
   - component: {fileID: 8492990886566110196}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: LeaveBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2612695332062738244}
   - component: {fileID: 3369226129409235433}
-  m_Layer: 14
+  m_Layer: 13
   m_Name: EntryBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}

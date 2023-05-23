@@ -60,6 +60,7 @@ public class Room : MonoBehaviour
             else
             {
                 wave++;
+                gameManager.enemiesKilledInRoom = 0;
                 enemiesLeftToSpawn = enemiesPerWave[wave];
                 enemySpawnTimer = 1.4f;
             }

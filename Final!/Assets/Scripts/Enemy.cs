@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -18,6 +19,7 @@ public class Enemy : MonoBehaviour
     public bool[] followAxis = { true, false };
     public float pointTimer = 0;
     public float pointTime = -3;
+    Vector2 realVelocity;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -31,9 +33,9 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        shootDelay -= Time.deltaTime;
-        stunDuration -= Time.deltaTime;
-        pointTimer -= Time.deltaTime;
+        shootDelay -= gameManager.dTime;
+        stunDuration -= gameManager.dTime;
+        pointTimer -= gameManager.dTime;
         if (shootDelay < 0 && stunDuration < 0)
         {
             shootDelay = 3;
@@ -41,12 +43,13 @@ public class Enemy : MonoBehaviour
             bullet.GetComponent<Rigidbody2D>().velocity = (gameManager.player.transform.position - transform.position).normalized * bulletSpeed;
             Destroy(bullet, 10);
         }
-        Vector2 previousVelocity = rb.velocity;
+        realVelocity = rb.velocity;
+        Vector2 previousVelocity = realVelocity;
         if (stunDuration < 0)
         {
             if (type.Contains("Point"))
             {
-                rb.velocity = movementDirection * movementSpeed;
+                realVelocity = movementDirection * movementSpeed;
                 if (pointTimer < pointTime)
                 {
                     movementDirection *= -1;
@@ -54,14 +57,15 @@ public class Enemy : MonoBehaviour
                 }
                 if (!type.Contains("Bird"))
                 {
-                    rb.velocity = new Vector2(rb.velocity.x, previousVelocity.y);
+                    realVelocity = new Vector2(realVelocity.x, previousVelocity.y);
                 }
             }
             else if (type.Contains("Follow"))
             {
-                rb.velocity = new Vector2(followAxis[0] ? (gameManager.player.transform.position - transform.position).normalized.x * movementSpeed : rb.velocity.x, followAxis[1] ? (gameManager.player.transform.position - transform.position).normalized.y * movementSpeed : rb.velocity.y);
+                realVelocity = new Vector2(followAxis[0] ? (gameManager.player.transform.position - transform.position).normalized.x * movementSpeed : realVelocity.x, followAxis[1] ? (gameManager.player.transform.position - transform.position).normalized.y * movementSpeed : realVelocity.y);
             }
         }
+        rb.velocity = realVelocity * (gameManager.slowActive ? 0.1f : 1);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -94,6 +98,10 @@ public class Enemy : MonoBehaviour
             if (health < 0)
             {
                 gameManager.combo++;
+                if (gameManager.combo > gameManager.highestCombo)
+                {
+                    gameManager.highestCombo = gameManager.combo;
+                }
                 gameManager.comboLeft = 8;
                 gameManager.enemiesKilledInRoom++;
                 gameManager.currentRoom.trySpawnWave();

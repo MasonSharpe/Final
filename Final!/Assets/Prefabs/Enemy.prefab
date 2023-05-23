@@ -171,5 +171,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2f608091759ad574bbdfe1bc2f253c30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletSpeed: 5
+  bulletSpeed: 10
+  movementSpeed: 5
   bulletPrefab: {fileID: 6222829795942124959, guid: 524d41aa675b4fb46a359dbf041ec95c, type: 3}
+  type: Stationary
+  followAxis: 0100
+  pointTimer: 0
+  pointTime: -3

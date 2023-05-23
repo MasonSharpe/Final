@@ -30,11 +30,11 @@ Transform:
   m_GameObject: {fileID: 6222829795942124959}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.4806, y: -1.72, z: 0}
-  m_LocalScale: {x: 0.1272, y: 0.1272, z: 0.1272}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &8177268227085616329
 SpriteRenderer:
@@ -202,7 +202,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.06896591
+        value: 0.14655685
         inSlope: 0
         outSlope: 0
         tangentMode: 0

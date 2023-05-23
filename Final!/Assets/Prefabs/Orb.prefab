@@ -116,7 +116,9 @@ MonoBehaviour:
   dashSpeed: 2
   remainingPierce: 0
   health: 20
+  pierceTimer: 0
   essence: 6
+  hasControl: 1
 --- !u!58 &7436076468676598177
 CircleCollider2D:
   m_ObjectHideFlags: 0
