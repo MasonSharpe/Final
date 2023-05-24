@@ -39,6 +39,7 @@ public class Room : MonoBehaviour
     {
         gameManager.currentRoom = this;
         enemySpawnTimer = 1.4f;
+        gameManager.inRoom = true;
         for (int i = 0; i < barriersToSpawn.Length; i++)
         {
             barriersToSpawn[i].SetActive(true);
@@ -55,6 +56,8 @@ public class Room : MonoBehaviour
                 for (int i = 0; i < barriersToDestroy.Length; i++)
                 {
                     barriersToDestroy[i].SetActive(false);
+                    gameManager.inRoom = false;
+                    gameManager.enemiesKilledInRoom = 0;
                 }
             }
             else

@@ -19,10 +19,12 @@ public class UI : MonoBehaviour
     Vector3 startingPanelPos;
     GameManager gameManager;
     string[] rankLetters = { "F", "D", "C", "B", "A", "S"};
+    int prevCombo;
     void Start()
     {
         startingPanelPos = panel.transform.position;
         gameManager = GetComponentInParent<GameManager>();
+        prevCombo = 0;
     }
 
     // Update is called once per frame
@@ -44,6 +46,11 @@ public class UI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             rankPanel.SetActive(!rankPanel.activeSelf);
+        }
+        if (prevCombo != gameManager.combo)
+        {
+            comboText.GetComponentInChildren<Animation>().Play();
+            prevCombo = gameManager.combo;
         }
     }
 }

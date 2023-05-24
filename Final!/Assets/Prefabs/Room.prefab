@@ -210,6 +210,7 @@ MonoBehaviour:
   - {fileID: 4072396485226064662}
   barriersToSpawn:
   - {fileID: 1416838871473596285}
+  - {fileID: 725433520250796571}
   enemiesPerWave: 0100000002000000
   enemies:
   - {fileID: 55045248063380163}

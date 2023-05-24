@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Damaging
   - Destructable
+  - Health
+  - Kill Barrier
   layers:
   - Default
   - TransparentFX
@@ -25,7 +27,7 @@ TagManager:
   - Destructable
   - ForcedDisconnected
   - EnemyCollision
-  - 
+  - AllStop
   - 
   - 
   - 

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using static UnityEditor.PlayerSettings;
 
 public class Orb : MonoBehaviour
 {
@@ -19,7 +18,7 @@ public class Orb : MonoBehaviour
     public LayerMask Disconnectban;
     public GameObject cameraMover;
     public float orbVelocity = 10;
-    public float movementSpeed = 5; // add slopes!!
+    public float movementSpeed = 5;
     public float dashSpeed = 2;
     public int remainingPierce = 0;
     public float health = 20;
@@ -47,14 +46,29 @@ public class Orb : MonoBehaviour
 
     private void Update()
     {
+        gameManager.dTime = Time.deltaTime * (gameManager.slowActive ? 0.1f : 0.8f);
         gameManager.levelTime += gameManager.dTime;
-        gameManager.dTime = Time.deltaTime * (gameManager.slowActive ? 0.1f : 1);
         Vector3 pos = Input.mousePosition;
         pos.z = -Camera.main.transform.position.z;
         pos = Camera.main.ScreenToWorldPoint(pos);
         invincTimer -= gameManager.dTime;
-        pierceTimer -= gameManager.dTime;
-        gameManager.comboLeft -= gameManager.dTime;
+        pierceTimer -= Time.deltaTime;
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        if (pierceTimer < 1 && !isConnected)
+        {
+            tr.enabled = false;
+        }
+        else
+        {
+            tr.enabled = true;
+        }
+        if (gameManager.inRoom)
+        {
+            gameManager.comboLeft -= gameManager.dTime;
+        }
         if (gameManager.comboLeft < 0)
         {
             gameManager.combo = 0;
@@ -79,7 +93,7 @@ public class Orb : MonoBehaviour
         else
         {
             gameManager.slowActive = false;
-            essence = Mathf.Clamp(essence + Time.deltaTime * (1 + gameManager.combo / 20), 0, 8);
+            essence = Mathf.Clamp(essence + Time.deltaTime * (0.7f + gameManager.combo / 20), 0, 8);
         }
         if (remainingPierce > 0 && pierceTimer < 0)
         {
@@ -145,6 +159,16 @@ public class Orb : MonoBehaviour
         if (collision.gameObject.tag == "Damaging")
         {
             takeDamage(4);
+        }
+        if (collision.gameObject.tag == "Health")
+        {
+            health = 20;
+            gameManager.comboLeft = 8;
+            Destroy(collision.gameObject);
+        }
+        if (collision.gameObject.tag == "Death Barrier")
+        {
+            takeDamage(20);
         }
     }
 

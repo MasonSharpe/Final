@@ -15,7 +15,7 @@ public class Enemy : MonoBehaviour
     float stunDuration = 0;
     Rigidbody2D rb;
     public string type = "Stationary";
-    Vector2 movementDirection = Vector2.right;
+    public Vector2 movementDirection = Vector2.right;
     public bool[] followAxis = { true, false };
     public float pointTimer = 0;
     public float pointTime = -3;
@@ -24,6 +24,8 @@ public class Enemy : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         gameManager = GetComponentInParent<GameManager>();
+        movementDirection *= -1;
+        pointTimer = 0;
         if (type.Contains("Bird"))
         {
             rb.gravityScale = 0;
@@ -88,12 +90,15 @@ public class Enemy : MonoBehaviour
     {
         if (gameManager.playerInfo.isConnected)
         {
-            stunDuration = gameManager.playerInfo.rb.velocity.magnitude < 4 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 4;
+            stunDuration += gameManager.playerInfo.rb.velocity.magnitude < 4 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 4;
         }
         else
         {
             health -= gameManager.playerInfo.rb.velocity.magnitude;
-            StartCoroutine(Camera.main.gameObject.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
+            if (gameManager.playerInfo.remainingPierce > 0)
+            {
+                StartCoroutine(Camera.main.gameObject.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
+            }
             gameManager.playerInfo.remainingPierce--;
             if (health < 0)
             {

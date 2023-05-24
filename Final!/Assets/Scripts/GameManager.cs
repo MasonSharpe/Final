@@ -20,9 +20,11 @@ public class GameManager : MonoBehaviour
     public int TimeRank;
     public int ComboRank;
     public int TotalRank;
+    public bool inRoom = false;
+    public GameObject currentCheckpoint;
     void Start()
     {
-
+        Autoload.instance.gameManager = this;
     }
 
     // Update is called once per frame

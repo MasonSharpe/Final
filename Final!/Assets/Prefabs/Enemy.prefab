@@ -100,7 +100,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 0.5
   m_AngularDrag: 0.05
   m_GravityScale: 1
   m_Material: {fileID: 0}
@@ -175,6 +175,7 @@ MonoBehaviour:
   movementSpeed: 5
   bulletPrefab: {fileID: 6222829795942124959, guid: 524d41aa675b4fb46a359dbf041ec95c, type: 3}
   type: Stationary
+  movementDirection: {x: 1, y: 0}
   followAxis: 0100
   pointTimer: 0
   pointTime: -3
