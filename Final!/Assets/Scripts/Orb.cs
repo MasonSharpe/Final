@@ -163,7 +163,7 @@ public class Orb : MonoBehaviour
         if (collision.gameObject.tag == "Health")
         {
             health = 20;
-            gameManager.comboLeft = 8;
+            gameManager.IncreaseCombo();
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Death Barrier")
@@ -192,6 +192,7 @@ public class Orb : MonoBehaviour
         if (collision.gameObject.tag == "Destructable" && rb.velocity.magnitude > 5 && !isConnected)
         {
             Destroy(collision.gameObject);
+            gameManager.comboLeft += 2;
         }
     }
 }

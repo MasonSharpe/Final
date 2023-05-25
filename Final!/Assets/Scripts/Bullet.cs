@@ -7,6 +7,8 @@ public class Bullet : MonoBehaviour
     GameManager gameManager;
     Rigidbody2D rb;
     Vector2 startingVelocity;
+    public bool homing;
+    float homingPeriod = 0.4f;
     void Start()
     {
         gameManager = GetComponentInParent<GameManager>();
@@ -17,8 +19,19 @@ public class Bullet : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rb.velocity = startingVelocity * (gameManager.slowActive ? 0.1f : 1);
-        if (((Vector2)Camera.main.transform.position - (Vector2)transform.position).magnitude > 10)
+        homingPeriod -= Time.deltaTime;
+        rb.velocity = startingVelocity;
+        if (homing)
+        {
+            rb.velocity += (Vector2)(gameManager.player.transform.position - transform.position).normalized * (startingVelocity.magnitude);
+        }
+        if (homingPeriod < 0 && homing)
+        {
+            homing = false;
+            startingVelocity = rb.velocity * 2;
+        }
+        rb.velocity *= (gameManager.slowActive ? 0.1f : 1);
+        if (((Vector2)Camera.main.transform.position - (Vector2)transform.position).magnitude > 20)
         {
             Destroy(gameObject);
         }

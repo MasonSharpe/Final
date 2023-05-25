@@ -34,4 +34,14 @@ public class GameManager : MonoBehaviour
         ComboRank = highestCombo == 0 ? 0 : highestCombo >= SCombo ? 5 : (int)Mathf.Round(highestCombo / (SCombo / 4f));
         TotalRank = (int)Mathf.Floor((TimeRank + ComboRank) / 2);
     }
+
+    public void IncreaseCombo()
+    {
+        combo++;
+        if (combo > highestCombo)
+        {
+            highestCombo = combo;
+        }
+        comboLeft = 8;
+    }
 }

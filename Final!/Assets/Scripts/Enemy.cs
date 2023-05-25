@@ -10,44 +10,80 @@ public class Enemy : MonoBehaviour
     float health = 50;
     float shootDelay = 3;
     public float bulletSpeed = 1.1f;
+    public float bulletFireRate = 3;
     public float movementSpeed = 5;
     public GameObject bulletPrefab;
     float stunDuration = 0;
     Rigidbody2D rb;
+    SpriteRenderer sprite;
     public string type = "Stationary";
     public Vector2 movementDirection = Vector2.right;
     public bool[] followAxis = { true, false };
     public float pointTimer = 0;
     public float pointTime = -3;
     Vector2 realVelocity;
+    Color ogColor;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        sprite = GetComponent<SpriteRenderer>();
         gameManager = GetComponentInParent<GameManager>();
         movementDirection *= -1;
+        ogColor = sprite.color;
         pointTimer = 0;
+        bulletFireRate = 3;
         if (type.Contains("Bird"))
         {
             rb.gravityScale = 0;
+        }
+        if (type.Contains("Point"))
+        {
+            movementSpeed += 2;
+            bulletSpeed += 2;
+            bulletFireRate -= 0.5f;
+        }
+        if (type.Contains("Stationary"))
+        {
+            bulletSpeed += 4;
+            bulletFireRate -= 1;
+        }
+        if (type.Contains("Elite"))
+        {
+            movementSpeed += 3;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        shootDelay -= gameManager.dTime;
-        stunDuration -= gameManager.dTime;
-        pointTimer -= gameManager.dTime;
-        if (shootDelay < 0 && stunDuration < 0)
+        if (stunDuration <= 0)
         {
-            shootDelay = 3;
+            shootDelay -= gameManager.dTime;
+        }
+        stunDuration = Mathf.Clamp(stunDuration - gameManager.dTime, 0, 3);
+        pointTimer -= gameManager.dTime;
+        if (shootDelay < 0.3f && shootDelay > 0)
+        {
+            sprite.color = Color.white;
+        }
+        else
+        {
+            sprite.color = ogColor;
+        }
+        if (shootDelay < 0)
+        {
+            shootDelay = bulletFireRate;
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity, gameManager.gameObject.transform);
             bullet.GetComponent<Rigidbody2D>().velocity = (gameManager.player.transform.position - transform.position).normalized * bulletSpeed;
-            Destroy(bullet, 10);
+            if (type.Contains("Elite"))
+            {
+                bullet.GetComponent<Bullet>().homing = true;
+            }
+                Destroy(bullet, 10);
         }
         realVelocity = rb.velocity;
         Vector2 previousVelocity = realVelocity;
-        if (stunDuration < 0)
+        if (stunDuration <= 0)
         {
             if (type.Contains("Point"))
             {
@@ -102,12 +138,7 @@ public class Enemy : MonoBehaviour
             gameManager.playerInfo.remainingPierce--;
             if (health < 0)
             {
-                gameManager.combo++;
-                if (gameManager.combo > gameManager.highestCombo)
-                {
-                    gameManager.highestCombo = gameManager.combo;
-                }
-                gameManager.comboLeft = 8;
+                gameManager.IncreaseCombo();
                 gameManager.enemiesKilledInRoom++;
                 gameManager.currentRoom.trySpawnWave();
                 Destroy(gameObject);
