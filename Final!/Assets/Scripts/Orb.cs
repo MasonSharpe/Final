@@ -12,7 +12,7 @@ public class Orb : MonoBehaviour
     CircleCollider2D cc;
     CircleCollider2D gcc;
     Rigidbody2D cameraRb;
-    TrailRenderer tr;
+    public TrailRenderer tr;
     GameManager gameManager;
     public LayerMask Connectban;
     public LayerMask Disconnectban;
@@ -27,14 +27,20 @@ public class Orb : MonoBehaviour
     public float essence = 8;
     public bool hasControl = true;
     Vector2 freezePosition;
+
+    private void Awake()
+    {
+        tr = GetComponent<TrailRenderer>();
+    }
+
     void Start()
     {
+       
         gameManager = GetComponentInParent<GameManager>();
        // Cursor.visible = false;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         gcc = GetComponentInChildren<CircleCollider2D>();
-        tr = GetComponent<TrailRenderer>();
         cameraRb = Camera.main.GetComponentInParent<Rigidbody2D>();
     }
 
@@ -47,7 +53,7 @@ public class Orb : MonoBehaviour
     private void Update()
     {
         gameManager.dTime = Time.deltaTime * (gameManager.slowActive ? 0.1f : 0.8f);
-        gameManager.levelTime += gameManager.dTime;
+        gameManager.autoload.levelTime += gameManager.dTime;
         Vector3 pos = Input.mousePosition;
         pos.z = -Camera.main.transform.position.z;
         pos = Camera.main.ScreenToWorldPoint(pos);
@@ -170,15 +176,22 @@ public class Orb : MonoBehaviour
         {
             takeDamage(20);
         }
+        if (collision.gameObject.tag == "Checkpoint")
+        {
+            gameManager.autoload.currentCheckpoint = collision.gameObject.transform.position;
+            gameManager.autoload.completedRooms = gameManager.completedRooms;
+            Destroy(collision.gameObject);
+        }
     }
 
     void takeDamage(float amount)
     {
         if (invincTimer < 0)
         {
+            StartCoroutine(Camera.main.gameObject.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
             health -= amount;
             gameManager.comboLeft -= 3;
-            invincTimer = 0.5f;
+            invincTimer = 0.25f;
             if (health <= 0)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);

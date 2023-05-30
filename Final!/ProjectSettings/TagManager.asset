@@ -8,6 +8,7 @@ TagManager:
   - Destructable
   - Health
   - Kill Barrier
+  - Checkpoint
   layers:
   - Default
   - TransparentFX

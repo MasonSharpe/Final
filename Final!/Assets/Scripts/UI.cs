@@ -34,8 +34,8 @@ public class UI : MonoBehaviour
         essence.value = gameManager.playerInfo.essence;
         comboLeft.value = gameManager.comboLeft;
         comboText.text = gameManager.combo.ToString();
-        time.text = "Time: " + rankLetters[gameManager.TimeRank] + " (" + Mathf.Round(gameManager.levelTime).ToString() + ")";
-        combo.text = "Combo: " + rankLetters[gameManager.ComboRank] + " (" + gameManager.highestCombo.ToString() + ")";
+        time.text = "Time: " + rankLetters[gameManager.TimeRank] + " (" + Mathf.Round(gameManager.autoload.levelTime).ToString() + ")";
+        combo.text = "Combo: " + rankLetters[gameManager.ComboRank] + " (" + gameManager.autoload.highestCombo.ToString() + ")";
         rank.text = "Total: " + rankLetters[gameManager.TotalRank];
         stable.isOn = gameManager.playerInfo.pierceTimer <= 1;
         Vector3 pos = Input.mousePosition;

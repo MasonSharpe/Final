@@ -51,12 +51,14 @@ public class Enemy : MonoBehaviour
         {
             movementSpeed += 3;
         }
+        health = 0;
+        playerCollision();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (stunDuration <= 0)
+        if (stunDuration <= 0 || sprite.color == Color.white)
         {
             shootDelay -= gameManager.dTime;
         }

@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,10 +12,9 @@ public class GameManager : MonoBehaviour
     public Room currentRoom;
     public int enemiesKilledInRoom;
     public float dTime;
-    public float levelTime;
+
     public int level = 0;
     public int combo = 0;
-    public int highestCombo = 0;
     public float comboLeft;
     public float STime;
     public int SCombo;
@@ -21,26 +22,44 @@ public class GameManager : MonoBehaviour
     public int ComboRank;
     public int TotalRank;
     public bool inRoom = false;
-    public GameObject currentCheckpoint;
+    public GameObject autoloadPrefab;
+    public Autoload autoload;
+    public List<GameObject> completedRooms = new List<GameObject>();
     void Start()
     {
-        Autoload.instance.gameManager = this;
+       
+        if (SceneManager.sceneCount == 2)
+        {
+            autoload = autoloadPrefab.GetComponent<Autoload>();
+        }
+        else
+        {
+            autoload = Instantiate(autoloadPrefab).GetComponent<Autoload>();
+            autoload.currentCheckpoint = Vector3.zero;
+            autoload.completedRooms = new List<GameObject>();
+            autoload.levelTime = 0;
+            autoload.highestCombo = 0;
+}
+        autoload.gameManager = this;
+        autoload.Respawn();
+
     }
+
 
     // Update is called once per frame
     void Update()
     {
-        TimeRank = levelTime == 0 ? 0 : 5 - (levelTime <= STime ? 0 : Mathf.Clamp((int)Mathf.Round((levelTime - STime) / (STime / 4f)), 0, 5));
-        ComboRank = highestCombo == 0 ? 0 : highestCombo >= SCombo ? 5 : (int)Mathf.Round(highestCombo / (SCombo / 4f));
+        TimeRank = autoload.levelTime == 0 ? 0 : 5 - (autoload.levelTime <= STime ? 0 : Mathf.Clamp((int)Mathf.Round((autoload.levelTime - STime) / (STime / 4f)), 0, 5));
+        ComboRank = autoload.highestCombo == 0 ? 0 : autoload.highestCombo >= SCombo ? 5 : (int)Mathf.Round(autoload.highestCombo / (SCombo / 4f));
         TotalRank = (int)Mathf.Floor((TimeRank + ComboRank) / 2);
     }
 
     public void IncreaseCombo()
     {
         combo++;
-        if (combo > highestCombo)
+        if (combo > autoload.highestCombo)
         {
-            highestCombo = combo;
+            autoload.highestCombo = combo;
         }
         comboLeft = 8;
     }

@@ -14,6 +14,7 @@ public class Room : MonoBehaviour
     int enemyIndex = 0;
     int enemiesLeftToSpawn = 0;
     int wave = 0;
+    
 
     void Start()
     {
@@ -58,6 +59,7 @@ public class Room : MonoBehaviour
                     barriersToDestroy[i].SetActive(false);
                     gameManager.inRoom = false;
                     gameManager.enemiesKilledInRoom = 0;
+                    gameManager.completedRooms.Add(gameObject);
                 }
             }
             else
