@@ -22,27 +22,13 @@ public class GameManager : MonoBehaviour
     public int ComboRank;
     public int TotalRank;
     public bool inRoom = false;
-    public GameObject autoloadPrefab;
     public Autoload autoload;
     public List<GameObject> completedRooms = new List<GameObject>();
     void Start()
     {
-       
-        if (SceneManager.sceneCount == 2)
-        {
-            autoload = autoloadPrefab.GetComponent<Autoload>();
-        }
-        else
-        {
-            autoload = Instantiate(autoloadPrefab).GetComponent<Autoload>();
-            autoload.currentCheckpoint = Vector3.zero;
-            autoload.completedRooms = new List<GameObject>();
-            autoload.levelTime = 0;
-            autoload.highestCombo = 0;
-}
+        autoload = Autoload.instance;
         autoload.gameManager = this;
         autoload.Respawn();
-
     }
 
 

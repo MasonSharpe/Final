@@ -17,6 +17,7 @@ public class Autoload : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(gameObject);
+        resetVariables();
         instance = this;
     }
 
@@ -37,10 +38,19 @@ public class Autoload : MonoBehaviour
             gameManager.player.transform.position = currentCheckpoint;
             gameManager.playerInfo.cameraMover.transform.position = currentCheckpoint;
             gameManager.playerInfo.tr.enabled = true;
-            for (int i = 0; i < completedRooms.Count; i++)
-            {
-                completedRooms[i].SetActive(false);
-            }
+           // for (int i = 0; i < completedRooms.Count; i++)
+           // {
+               // completedRooms[i].SetActive(false);
+            //}
         }
+    }
+
+
+    public void resetVariables()
+    {
+        currentCheckpoint = Vector3.zero;
+        completedRooms = new List<GameObject>();
+        levelTime = 0;
+        highestCombo = 0;
     }
 }

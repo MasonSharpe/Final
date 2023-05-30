@@ -59,7 +59,7 @@ public class Room : MonoBehaviour
                     barriersToDestroy[i].SetActive(false);
                     gameManager.inRoom = false;
                     gameManager.enemiesKilledInRoom = 0;
-                    gameManager.completedRooms.Add(gameObject);
+                    //gameManager.completedRooms.Add(gameObject);
                 }
             }
             else

@@ -51,8 +51,6 @@ public class Enemy : MonoBehaviour
         {
             movementSpeed += 3;
         }
-        health = 0;
-        playerCollision();
     }
 
     // Update is called once per frame
@@ -122,6 +120,10 @@ public class Enemy : MonoBehaviour
         {
             playerCollision();
         }
+        if (collision.gameObject.tag == "Death Barrier")
+        {
+            takeDamage(999);
+        }
     }
 
     void playerCollision()
@@ -132,19 +134,24 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            health -= gameManager.playerInfo.rb.velocity.magnitude;
-            if (gameManager.playerInfo.remainingPierce > 0)
-            {
-                StartCoroutine(Camera.main.gameObject.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
-            }
-            gameManager.playerInfo.remainingPierce--;
-            if (health < 0)
-            {
-                gameManager.IncreaseCombo();
-                gameManager.enemiesKilledInRoom++;
-                gameManager.currentRoom.trySpawnWave();
-                Destroy(gameObject);
-            }
+            takeDamage(gameManager.playerInfo.rb.velocity.magnitude);
+        }
+    }
+
+    void takeDamage(float amount)
+    {
+        health -= amount;
+        if (gameManager.playerInfo.remainingPierce > 0)
+        {
+            StartCoroutine(Camera.main.gameObject.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
+        }
+        gameManager.playerInfo.remainingPierce--;
+        if (health < 0)
+        {
+            gameManager.IncreaseCombo();
+            gameManager.enemiesKilledInRoom++;
+            gameManager.currentRoom.trySpawnWave();
+            Destroy(gameObject);
         }
     }
 }

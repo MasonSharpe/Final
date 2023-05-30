@@ -679,7 +679,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5708028591593818431
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1416,7 +1416,6 @@ MonoBehaviour:
   rankPanel: {fileID: 5643812583896703960}
   time: {fileID: 918025606201482279}
   combo: {fileID: 6545529277486178050}
-  kills: {fileID: 0}
   rank: {fileID: 8700269545210190179}
 --- !u!1 &8060998088989992655
 GameObject:

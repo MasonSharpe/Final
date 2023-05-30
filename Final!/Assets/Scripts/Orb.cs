@@ -37,7 +37,8 @@ public class Orb : MonoBehaviour
     {
        
         gameManager = GetComponentInParent<GameManager>();
-       // Cursor.visible = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
         rb = GetComponent<Rigidbody2D>();
         cc = GetComponent<CircleCollider2D>();
         gcc = GetComponentInChildren<CircleCollider2D>();
@@ -190,12 +191,11 @@ public class Orb : MonoBehaviour
         {
             StartCoroutine(Camera.main.gameObject.GetComponent<CameraShake>().Shake(0.2f, 0.2f));
             health -= amount;
-            gameManager.comboLeft -= 3;
+            gameManager.comboLeft -= 2;
             invincTimer = 0.25f;
             if (health <= 0)
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                Cursor.lockState = CursorLockMode.Locked;
             }
         }
     }

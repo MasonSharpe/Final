@@ -26,6 +26,7 @@ public class LevelEnd : MonoBehaviour
             if (shrinkTimer < 0.2f)
             {
                 gameManager.level++;
+                gameManager.autoload.resetVariables();
                 SceneManager.LoadScene("Level" + gameManager.level);
                 shrinkTimer = 0;
             }
