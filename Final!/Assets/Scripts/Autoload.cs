@@ -11,6 +11,7 @@ public class Autoload : MonoBehaviour
     public List<GameObject> completedRooms = new List<GameObject>();
     public float levelTime = 0;
     public int highestCombo = 0;
+    public int[] levelRanks = {-1, -1, -1, -1};
 
 
 
@@ -38,10 +39,6 @@ public class Autoload : MonoBehaviour
             gameManager.player.transform.position = currentCheckpoint;
             gameManager.playerInfo.cameraMover.transform.position = currentCheckpoint;
             gameManager.playerInfo.tr.enabled = true;
-           // for (int i = 0; i < completedRooms.Count; i++)
-           // {
-               // completedRooms[i].SetActive(false);
-            //}
         }
     }
 
@@ -52,5 +49,10 @@ public class Autoload : MonoBehaviour
         completedRooms = new List<GameObject>();
         levelTime = 0;
         highestCombo = 0;
+    }
+
+    public void resetTimes()
+    {
+        levelRanks = new int[] { -1, -1, -1, -1 };
     }
 }

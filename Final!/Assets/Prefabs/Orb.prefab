@@ -104,6 +104,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isConnected: 1
   rb: {fileID: 0}
+  tr: {fileID: 0}
   Connectban:
     serializedVersion: 2
     m_Bits: 4096
@@ -180,7 +181,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 1
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!96 &8395770580101404280
 TrailRenderer:
   serializedVersion: 3

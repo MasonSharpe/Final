@@ -8,7 +8,7 @@ public class Enemy : MonoBehaviour
 {
     GameManager gameManager;
     float health = 50;
-    float shootDelay = 3;
+    float shootDelay = 1;
     public float bulletSpeed = 1.1f;
     public float bulletFireRate = 3;
     public float movementSpeed = 5;
@@ -130,7 +130,7 @@ public class Enemy : MonoBehaviour
     {
         if (gameManager.playerInfo.isConnected)
         {
-            stunDuration += gameManager.playerInfo.rb.velocity.magnitude < 4 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 4;
+            stunDuration += gameManager.playerInfo.rb.velocity.magnitude < 3 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 3;
         }
         else
         {

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 4552669929005123040}
   m_Layer: 13
   m_Name: Damaging
-  m_TagString: Untagged
+  m_TagString: Damaging
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -983,7 +983,7 @@ Tilemap:
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
-  m_Color: {r: 0.6886792, g: 0.6886792, b: 0.6886792, a: 1}
+  m_Color: {r: 0.9245283, g: 0.9245283, b: 0.9245283, a: 1}
   m_Origin: {x: -19, y: -21, z: 0}
   m_Size: {x: 111, y: 33, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}

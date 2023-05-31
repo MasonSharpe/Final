@@ -17,7 +17,7 @@ public class Loading : MonoBehaviour
         t -= Time.deltaTime;
         if (t < -1)
         {
-            SceneManager.LoadScene("Level3");
+            SceneManager.LoadScene("MainMenu");
         }
     }
 }

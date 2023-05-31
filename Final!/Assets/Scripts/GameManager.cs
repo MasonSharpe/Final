@@ -36,7 +36,7 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         TimeRank = autoload.levelTime == 0 ? 0 : 5 - (autoload.levelTime <= STime ? 0 : Mathf.Clamp((int)Mathf.Round((autoload.levelTime - STime) / (STime / 4f)), 0, 5));
-        ComboRank = autoload.highestCombo == 0 ? 0 : autoload.highestCombo >= SCombo ? 5 : (int)Mathf.Round(autoload.highestCombo / (SCombo / 4f));
+        ComboRank = SCombo == 0 ? 5 : autoload.highestCombo == 0 ? 0 : autoload.highestCombo >= SCombo ? 5 : (int)Mathf.Round(autoload.highestCombo / (SCombo / 4f));
         TotalRank = (int)Mathf.Floor((TimeRank + ComboRank) / 2);
     }
 

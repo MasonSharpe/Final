@@ -43,6 +43,8 @@ public class Orb : MonoBehaviour
         cc = GetComponent<CircleCollider2D>();
         gcc = GetComponentInChildren<CircleCollider2D>();
         cameraRb = Camera.main.GetComponentInParent<Rigidbody2D>();
+        Physics2D.IgnoreLayerCollision(7, 12, false);
+        Physics2D.IgnoreLayerCollision(7, 16, true);
     }
 
     // Update is called once per frame
@@ -160,7 +162,7 @@ public class Orb : MonoBehaviour
     {
         if (collision.gameObject.layer == 9)
         {
-            takeDamage(4);
+            takeDamage(3);
             Destroy(collision.gameObject);
         }
         if (collision.gameObject.tag == "Damaging")
@@ -206,6 +208,10 @@ public class Orb : MonoBehaviour
         {
             Destroy(collision.gameObject);
             gameManager.comboLeft += 2;
+        }
+        if (collision.gameObject.tag == "Damaging")
+        {
+            takeDamage(4);
         }
     }
 }
