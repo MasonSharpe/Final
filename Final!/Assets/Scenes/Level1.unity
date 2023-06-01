@@ -246,7 +246,10 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Control the Orb with your mouse cursor
 
-    WASD to move the camera'
+    WASD to move the camera
+
+    Esc
+    to pause'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
   m_sharedMaterial: {fileID: 2147374, guid: 0161d805a3764c089bef00bfe00793f5, type: 2}
@@ -2265,7 +2268,7 @@ MonoBehaviour:
   currentRoom: {fileID: 0}
   enemiesKilledInRoom: 0
   dTime: 0
-  level: 0
+  level: 1
   combo: 0
   comboLeft: 0
   STime: 15

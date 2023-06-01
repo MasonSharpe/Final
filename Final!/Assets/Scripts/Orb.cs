@@ -175,7 +175,7 @@ public class Orb : MonoBehaviour
             gameManager.IncreaseCombo();
             Destroy(collision.gameObject);
         }
-        if (collision.gameObject.tag == "Death Barrier")
+        if (collision.gameObject.tag == "Kill Barrier")
         {
             takeDamage(20);
         }
@@ -212,6 +212,10 @@ public class Orb : MonoBehaviour
         if (collision.gameObject.tag == "Damaging")
         {
             takeDamage(4);
+        }
+        if (collision.gameObject.tag == "Kill Barrier")
+        {
+            takeDamage(20);
         }
     }
 }

@@ -34,10 +34,12 @@ public class Pause : MonoBehaviour
     public void Resume()
     {
         panel.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void MainMenu()
     {
         SceneManager.LoadScene("MainMenu");
+        Time.timeScale = 1;
     }
 }

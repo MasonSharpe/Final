@@ -25,6 +25,10 @@ public class LevelEnd : MonoBehaviour
             gameManager.player.transform.localScale = new Vector3(mult, mult, 1);
             if (shrinkTimer < 0.2f)
             {
+                if (gameManager.TotalRank > gameManager.autoload.levelRanks[gameManager.level - 1])
+                {
+                    gameManager.autoload.levelRanks[gameManager.level - 1] = gameManager.TotalRank;
+                }
                 gameManager.level++;
                 gameManager.autoload.resetVariables();
                 SceneManager.LoadScene("Level" + gameManager.level);

@@ -40,6 +40,10 @@ public class Autoload : MonoBehaviour
             gameManager.playerInfo.cameraMover.transform.position = currentCheckpoint;
             gameManager.playerInfo.tr.enabled = true;
         }
+        else
+        {
+            resetVariables();
+        }
     }
 
 

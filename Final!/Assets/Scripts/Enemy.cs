@@ -112,6 +112,10 @@ public class Enemy : MonoBehaviour
         {
             playerCollision();
         }
+        if (collision.gameObject.tag == "Kill Barrier")
+        {
+            takeDamage(999);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -120,7 +124,7 @@ public class Enemy : MonoBehaviour
         {
             playerCollision();
         }
-        if (collision.gameObject.tag == "Death Barrier")
+        if (collision.gameObject.tag == "Kill Barrier")
         {
             takeDamage(999);
         }
