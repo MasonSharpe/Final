@@ -13,6 +13,7 @@ public class Enemy : MonoBehaviour
     public float bulletFireRate = 3;
     public float movementSpeed = 5;
     public GameObject bulletPrefab;
+    public GameObject stun;
     float stunDuration = 0;
     Rigidbody2D rb;
     SpriteRenderer sprite;
@@ -50,13 +51,14 @@ public class Enemy : MonoBehaviour
         if (type.Contains("Elite"))
         {
             movementSpeed += 3;
+            ogColor.b = 0;
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (stunDuration <= 0 || sprite.color == Color.white)
+        if (stunDuration <= 0 || sprite.color == Color.red)
         {
             shootDelay -= gameManager.dTime;
         }
@@ -64,7 +66,7 @@ public class Enemy : MonoBehaviour
         pointTimer -= gameManager.dTime;
         if (shootDelay < 0.3f && shootDelay > 0)
         {
-            sprite.color = Color.white;
+            sprite.color = Color.red;
         }
         else
         {
@@ -85,6 +87,7 @@ public class Enemy : MonoBehaviour
         Vector2 previousVelocity = realVelocity;
         if (stunDuration <= 0)
         {
+            stun.SetActive(false);
             if (type.Contains("Point"))
             {
                 realVelocity = movementDirection * movementSpeed;
@@ -102,6 +105,10 @@ public class Enemy : MonoBehaviour
             {
                 realVelocity = new Vector2(followAxis[0] ? (gameManager.player.transform.position - transform.position).normalized.x * movementSpeed : realVelocity.x, followAxis[1] ? (gameManager.player.transform.position - transform.position).normalized.y * movementSpeed : realVelocity.y);
             }
+        }
+        else
+        {
+            stun.SetActive(true);
         }
         rb.velocity = realVelocity * (gameManager.slowActive ? 0.1f : 1);
     }
