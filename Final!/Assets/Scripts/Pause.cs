@@ -42,4 +42,11 @@ public class Pause : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
         Time.timeScale = 1;
     }
+
+    public void Restart()
+    {
+        gameManager.autoload.currentCheckpoint = Vector3.zero;
+        Time.timeScale = 1;
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
 }

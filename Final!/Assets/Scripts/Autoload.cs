@@ -11,7 +11,7 @@ public class Autoload : MonoBehaviour
     public List<GameObject> completedRooms = new List<GameObject>();
     public float levelTime = 0;
     public int highestCombo = 0;
-    public int[] levelRanks = {-1, -1, -1, -1};
+    public int[] levelRanks = {-1, -1, -1, -1, -1};
 
 
 
@@ -20,6 +20,7 @@ public class Autoload : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         resetVariables();
         instance = this;
+
     }
 
     // Update is called once per frame
@@ -33,7 +34,7 @@ public class Autoload : MonoBehaviour
 
     public void Respawn()
     {
-        if (currentCheckpoint != null)
+        if (currentCheckpoint != null && currentCheckpoint != Vector3.zero)
         {
             gameManager.playerInfo.tr.enabled = false;
             gameManager.player.transform.position = currentCheckpoint;
@@ -57,6 +58,6 @@ public class Autoload : MonoBehaviour
 
     public void resetTimes()
     {
-        levelRanks = new int[] { -1, -1, -1, -1 };
+        levelRanks = new int[] { -1, -1, -1, -1, -1 };
     }
 }

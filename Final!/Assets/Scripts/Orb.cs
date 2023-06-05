@@ -140,7 +140,7 @@ public class Orb : MonoBehaviour
         {
 
             mouseVelocity = ((Vector2)new Vector3(pos.x, pos.y, 0) - (Vector2)transform.position) * (gameManager.slowActive ? 0.1f : 1);
-            rb.velocity = mouseVelocity;
+            rb.velocity = mouseVelocity * 1.1f;
         }
         if (!isConnected && remainingPierce > 0)
         {

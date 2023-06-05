@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 {
     GameManager gameManager;
     float health = 50;
+    float maxHealth = 50;
     float shootDelay = 1;
     public float bulletSpeed = 1.1f;
     public float bulletFireRate = 3;
@@ -22,6 +23,8 @@ public class Enemy : MonoBehaviour
     public bool[] followAxis = { true, false };
     public float pointTimer = 0;
     public float pointTime = -3;
+    int bossBursts = 3;
+    float bossFirerate;
     Vector2 realVelocity;
     Color ogColor;
     void Start()
@@ -51,8 +54,18 @@ public class Enemy : MonoBehaviour
         if (type.Contains("Elite"))
         {
             movementSpeed += 3;
+            health += 25;
             ogColor.b = 0;
         }
+        if (type.Contains("Boss"))
+        {
+            bulletSpeed += 8;
+            bulletFireRate += 0.5f;
+            bossFirerate = bulletFireRate;
+            health += 150;
+            ogColor.r = 0;
+        }
+        maxHealth = health;
     }
 
     // Update is called once per frame
@@ -74,7 +87,23 @@ public class Enemy : MonoBehaviour
         }
         if (shootDelay < 0)
         {
-            shootDelay = bulletFireRate;
+            if (type.Contains("Boss"))
+            {
+                if (bossBursts < 2)
+                {
+                    bossBursts = 3;
+                    shootDelay = bulletFireRate;
+                }
+                else
+                {
+                    bossBursts--;
+                    shootDelay = 0.1f;
+                }
+            }
+            else
+            {
+                shootDelay = bulletFireRate;
+            }
             GameObject bullet = Instantiate(bulletPrefab, transform.position, Quaternion.identity, gameManager.gameObject.transform);
             bullet.GetComponent<Rigidbody2D>().velocity = (gameManager.player.transform.position - transform.position).normalized * bulletSpeed;
             if (type.Contains("Elite"))
@@ -104,6 +133,15 @@ public class Enemy : MonoBehaviour
             else if (type.Contains("Follow"))
             {
                 realVelocity = new Vector2(followAxis[0] ? (gameManager.player.transform.position - transform.position).normalized.x * movementSpeed : realVelocity.x, followAxis[1] ? (gameManager.player.transform.position - transform.position).normalized.y * movementSpeed : realVelocity.y);
+            }
+            else if (type.Contains("Boss"))
+            {
+                realVelocity = new Vector2((gameManager.player.transform.position - transform.position).normalized.x * movementSpeed, (gameManager.player.transform.position - transform.position).normalized.y * movementSpeed);
+                if (shootDelay <= 0.4f)
+                {
+                    realVelocity *= 0.5f;
+                }
+                bulletFireRate = Mathf.Clamp(bossFirerate * (health / maxHealth), 0.5f, 100);
             }
         }
         else
@@ -141,7 +179,10 @@ public class Enemy : MonoBehaviour
     {
         if (gameManager.playerInfo.isConnected)
         {
-            stunDuration += gameManager.playerInfo.rb.velocity.magnitude < 3 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 3;
+            if (!type.Contains("Boss"))
+            {
+                stunDuration += gameManager.playerInfo.rb.velocity.magnitude < 3 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 3;
+            }
         }
         else
         {

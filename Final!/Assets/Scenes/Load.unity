@@ -671,7 +671,7 @@ MonoBehaviour:
   completedRooms: []
   levelTime: 0
   highestCombo: 0
-  levelRanks: ffffffffffffffffffffffffffffffff
+  levelRanks: ffffffffffffffffffffffffffffffffffffffff
 --- !u!4 &4678037088413859404
 Transform:
   m_ObjectHideFlags: 0
