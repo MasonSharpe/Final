@@ -34,7 +34,6 @@ public class MainMenu : MonoBehaviour
                 buttons[i].text = "Rank: " + (rank == -1 ? "NA" : rankLetters[rank]);
                 rankIndex++;
             }
-            
         }
         levelSelectPanel.SetActive(true);
     }
@@ -56,6 +55,26 @@ public class MainMenu : MonoBehaviour
 
     public void resetTimes()
     {
+        autoload.saveData.isDeleted = true;
         autoload.resetTimes();
+        autoload.WriteFile();
+    }
+
+    public void loadSave()
+    {
+        autoload.ReadFile();
+        if (!autoload.saveData.isDeleted)
+        {
+            autoload.levelRanks[0] = autoload.saveData.level1;
+            autoload.levelRanks[1] = autoload.saveData.level2;
+            autoload.levelRanks[2] = autoload.saveData.level3;
+            autoload.levelRanks[3] = autoload.saveData.level4;
+            autoload.levelRanks[4] = autoload.saveData.level5;
+        }
+    }
+
+    public void saveGame()
+    {
+        autoload.WriteFile();
     }
 }

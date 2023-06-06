@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
 
 public class Autoload : MonoBehaviour
@@ -13,7 +15,16 @@ public class Autoload : MonoBehaviour
     public int highestCombo = 0;
     public int[] levelRanks = {-1, -1, -1, -1, -1};
 
+    FileStream dataStream;
+    BinaryFormatter converter = new BinaryFormatter();
+    string saveFile;
+    public SaveData saveData;
 
+    private void Awake()
+    {
+        saveFile = Application.persistentDataPath + "/gamedata.data";
+        saveData = new SaveData();
+    }
 
     void Start()
     {
@@ -59,5 +70,39 @@ public class Autoload : MonoBehaviour
     public void resetTimes()
     {
         levelRanks = new int[] { -1, -1, -1, -1, -1 };
+    }
+
+    public void WriteFile()
+    {
+        saveData.level1 = levelRanks[0];
+        saveData.level2 = levelRanks[1];
+        saveData.level3 = levelRanks[2];
+        saveData.level4 = levelRanks[3];
+        saveData.level5 = levelRanks[4];
+        dataStream = new FileStream(saveFile, FileMode.Create);
+        converter.Serialize(dataStream, saveData);
+        dataStream.Close();
+    }
+
+    public void ReadFile()
+    {
+        if (File.Exists(saveFile))
+        {
+            dataStream = new FileStream(saveFile, FileMode.Open);
+            saveData = (SaveData)converter.Deserialize(dataStream);
+            dataStream.Close();
+        }
+    }
+
+    [System.Serializable]
+
+    public class SaveData
+    {
+        public int level1 = -1;
+        public int level2 = -1;
+        public int level3 = -1;
+        public int level4 = -1;
+        public int level5 = -1;
+        public bool isDeleted = false;
     }
 }

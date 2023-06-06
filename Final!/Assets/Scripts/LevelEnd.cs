@@ -28,6 +28,7 @@ public class LevelEnd : MonoBehaviour
                 if (gameManager.TotalRank > gameManager.autoload.levelRanks[gameManager.level - 1])
                 {
                     gameManager.autoload.levelRanks[gameManager.level - 1] = gameManager.TotalRank;
+                    gameManager.autoload.saveData.isDeleted = false;
                 }
                 gameManager.level++;
                 gameManager.autoload.resetVariables();

@@ -267,6 +267,8 @@ MonoBehaviour:
   followAxis: 0100
   pointTimer: 0
   pointTime: -3
+  normalAc: {fileID: 9100000, guid: c96025b1724537f4d8c42666945100aa, type: 2}
+  attackingAc: {fileID: 9100000, guid: 0044e218f2d6c5f4e8b4f7c46c69c9c5, type: 2}
 --- !u!95 &4386844150195182214
 Animator:
   serializedVersion: 5

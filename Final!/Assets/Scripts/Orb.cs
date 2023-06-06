@@ -102,7 +102,7 @@ public class Orb : MonoBehaviour
         else
         {
             gameManager.slowActive = false;
-            essence = Mathf.Clamp(essence + Time.deltaTime * (0.7f + gameManager.combo / 20), 0, 8);
+            essence = Mathf.Clamp(essence + Time.deltaTime * (0.5f + gameManager.combo / 20), 0, 8);
         }
         if (remainingPierce > 0 && pierceTimer < 0)
         {
@@ -138,7 +138,6 @@ public class Orb : MonoBehaviour
         }
         if (isConnected)
         {
-
             mouseVelocity = ((Vector2)new Vector3(pos.x, pos.y, 0) - (Vector2)transform.position) * (gameManager.slowActive ? 0.1f : 1);
             rb.velocity = mouseVelocity * 1.1f;
         }

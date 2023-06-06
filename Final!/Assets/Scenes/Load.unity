@@ -672,6 +672,13 @@ MonoBehaviour:
   levelTime: 0
   highestCombo: 0
   levelRanks: ffffffffffffffffffffffffffffffffffffffff
+  saveData:
+    level1: -1
+    level2: -1
+    level3: -1
+    level4: -1
+    level5: -1
+    isDeleted: 0
 --- !u!4 &4678037088413859404
 Transform:
   m_ObjectHideFlags: 0

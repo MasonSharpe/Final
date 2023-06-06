@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Animations;
 using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -27,11 +28,16 @@ public class Enemy : MonoBehaviour
     float bossFirerate;
     Vector2 realVelocity;
     Color ogColor;
+    public RuntimeAnimatorController normalAc;
+    public RuntimeAnimatorController attackingAc;
+    Animator anim;
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sprite = GetComponent<SpriteRenderer>();
         gameManager = GetComponentInParent<GameManager>();
+        anim = GetComponent<Animator>();
+        anim.runtimeAnimatorController = normalAc;
         movementDirection *= -1;
         ogColor = sprite.color;
         pointTimer = 0;
@@ -71,7 +77,7 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (stunDuration <= 0 || sprite.color == Color.red)
+        if (stunDuration <= 0 || sprite.color.g == 0.7f)
         {
             shootDelay -= gameManager.dTime;
         }
@@ -79,11 +85,14 @@ public class Enemy : MonoBehaviour
         pointTimer -= gameManager.dTime;
         if (shootDelay < 0.3f && shootDelay > 0)
         {
-            sprite.color = Color.red;
+            sprite.color = new Color(1, 0.7f, 0.7f);
+            anim.runtimeAnimatorController = attackingAc;
         }
         else
         {
             sprite.color = ogColor;
+            print("ah");
+            anim.runtimeAnimatorController = normalAc;
         }
         if (shootDelay < 0)
         {
