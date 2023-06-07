@@ -16,6 +16,7 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI time;
     public TextMeshProUGUI combo;
     public TextMeshProUGUI rank;
+    public GameObject overlay;
     Vector3 startingPanelPos;
     GameManager gameManager;
     string[] rankLetters = { "F", "D", "C", "B", "A", "S"};
@@ -25,6 +26,7 @@ public class UI : MonoBehaviour
         startingPanelPos = panel.transform.position;
         gameManager = GetComponentInParent<GameManager>();
         prevCombo = 0;
+        rankPanel.SetActive(gameManager.autoload.ranksVisible);
     }
 
     // Update is called once per frame
@@ -46,11 +48,20 @@ public class UI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             rankPanel.SetActive(!rankPanel.activeSelf);
+            gameManager.autoload.ranksVisible = rankPanel.activeSelf;
         }
         if (prevCombo != gameManager.combo)
         {
             comboText.GetComponentInChildren<Animation>().Play();
             prevCombo = gameManager.combo;
+        }
+        if (gameManager.slowActive)
+        {
+            overlay.SetActive(true);
+        }
+        else
+        {
+            overlay.SetActive(false);
         }
     }
 }

@@ -45,7 +45,7 @@ public class MainMenu : MonoBehaviour
 
     public void selectLevel(int index)
     {
-        SceneManager.LoadScene("Level" + index);
+        SceneManager.LoadScene(index == 1 && autoload.levelRanks[0] == -1 ? "Cutscene1" : "Level" + index);
     }
 
     public void closeLevelSelect()

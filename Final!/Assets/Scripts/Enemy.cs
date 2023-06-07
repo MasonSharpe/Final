@@ -30,6 +30,11 @@ public class Enemy : MonoBehaviour
     Color ogColor;
     public RuntimeAnimatorController normalAc;
     public RuntimeAnimatorController attackingAc;
+    public RuntimeAnimatorController wingedNormalAc;
+    public RuntimeAnimatorController wingedAttackingAc;
+    public AudioClip hit;
+    public AudioClip death;
+    public AudioClip stunSound;
     Animator anim;
     void Start()
     {
@@ -86,13 +91,12 @@ public class Enemy : MonoBehaviour
         if (shootDelay < 0.3f && shootDelay > 0)
         {
             sprite.color = new Color(1, 0.7f, 0.7f);
-            anim.runtimeAnimatorController = attackingAc;
+            anim.runtimeAnimatorController = type.Contains("Bird") ? wingedAttackingAc : attackingAc;
         }
         else
         {
             sprite.color = ogColor;
-            print("ah");
-            anim.runtimeAnimatorController = normalAc;
+            anim.runtimeAnimatorController = type.Contains("Bird") ? wingedNormalAc : normalAc;
         }
         if (shootDelay < 0)
         {
@@ -190,7 +194,12 @@ public class Enemy : MonoBehaviour
         {
             if (!type.Contains("Boss"))
             {
-                stunDuration += gameManager.playerInfo.rb.velocity.magnitude < 3 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 3;
+                float amount = gameManager.playerInfo.rb.velocity.magnitude < 3 ? 0 : gameManager.playerInfo.rb.velocity.magnitude / 3;
+                stunDuration += amount;
+                if (amount > 0)
+                {
+                    gameManager.autoload.GetComponent<AudioSource>().PlayOneShot(stunSound);
+                }
             }
         }
         else
@@ -212,7 +221,12 @@ public class Enemy : MonoBehaviour
             gameManager.IncreaseCombo();
             gameManager.enemiesKilledInRoom++;
             gameManager.currentRoom.trySpawnWave();
+            gameManager.autoload.GetComponent<AudioSource>().PlayOneShot(death);
             Destroy(gameObject);
+        }
+        else
+        {
+            gameManager.autoload.GetComponent<AudioSource>().PlayOneShot(hit);
         }
     }
 }

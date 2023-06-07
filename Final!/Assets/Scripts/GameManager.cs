@@ -24,10 +24,16 @@ public class GameManager : MonoBehaviour
     public bool inRoom = false;
     public Autoload autoload;
     public List<GameObject> completedRooms = new List<GameObject>();
-    void Start()
+
+    private void Awake()
     {
         autoload = Autoload.instance;
         autoload.gameManager = this;
+    }
+
+    void Start()
+    {
+        
         autoload.Respawn();
     }
 
@@ -37,7 +43,7 @@ public class GameManager : MonoBehaviour
     {
         TimeRank = autoload.levelTime == 0 ? 0 : 5 - (autoload.levelTime <= STime ? 0 : Mathf.Clamp((int)Mathf.Round((autoload.levelTime - STime) / (STime / 4f)), 0, 5));
         ComboRank = SCombo == 0 ? 5 : autoload.highestCombo == 0 ? 0 : autoload.highestCombo >= SCombo ? 5 : (int)Mathf.Round(autoload.highestCombo / (SCombo / 4f));
-        TotalRank = (int)Mathf.Floor((TimeRank + ComboRank) / 2);
+        TotalRank = autoload.highestCombo == 0 ? ComboRank : (int)Mathf.Floor((TimeRank + ComboRank) / 2);
     }
 
     public void IncreaseCombo()

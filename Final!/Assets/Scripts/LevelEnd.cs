@@ -32,7 +32,7 @@ public class LevelEnd : MonoBehaviour
                 }
                 gameManager.level++;
                 gameManager.autoload.resetVariables();
-                SceneManager.LoadScene("Level" + gameManager.level);
+                SceneManager.LoadScene(gameManager.level == 5 ? "Cutscene2" : ("Level" + gameManager.level));
                 shrinkTimer = 0;
             }
         }

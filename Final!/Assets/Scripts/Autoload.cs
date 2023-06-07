@@ -13,6 +13,7 @@ public class Autoload : MonoBehaviour
     public List<GameObject> completedRooms = new List<GameObject>();
     public float levelTime = 0;
     public int highestCombo = 0;
+    public bool ranksVisible = false;
     public int[] levelRanks = {-1, -1, -1, -1, -1};
 
     FileStream dataStream;
