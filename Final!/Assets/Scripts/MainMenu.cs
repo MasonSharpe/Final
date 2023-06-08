@@ -9,11 +9,15 @@ public class MainMenu : MonoBehaviour
     public GameObject levelSelectPanel;
     Autoload autoload;
     string[] rankLetters = { "F", "D", "C", "B", "A", "S" };
+    public AudioClip levelMusic;
+    public AudioClip mainMusic;
 
     void Start()
     {
         levelSelectPanel.SetActive(false);
         autoload = Autoload.instance;
+        autoload.music.clip = mainMusic;
+        autoload.music.Play();
     }
 
     // Update is called once per frame
@@ -45,6 +49,12 @@ public class MainMenu : MonoBehaviour
 
     public void selectLevel(int index)
     {
+        autoload.music.Stop();
+        if (!(index == 1 && autoload.levelRanks[0] == -1))
+        {
+            autoload.music.clip = levelMusic;
+            autoload.music.Play();
+        }
         SceneManager.LoadScene(index == 1 && autoload.levelRanks[0] == -1 ? "Cutscene1" : "Level" + index);
     }
 

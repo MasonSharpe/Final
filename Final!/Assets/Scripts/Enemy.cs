@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Animations;
-using UnityEditor.Tilemaps;
 using UnityEngine;
 using UnityEngine.Rendering;
 
@@ -198,7 +196,7 @@ public class Enemy : MonoBehaviour
                 stunDuration += amount;
                 if (amount > 0)
                 {
-                    gameManager.autoload.GetComponent<AudioSource>().PlayOneShot(stunSound);
+                    gameManager.autoload.sfx.PlayOneShot(stunSound);
                 }
             }
         }
@@ -221,12 +219,12 @@ public class Enemy : MonoBehaviour
             gameManager.IncreaseCombo();
             gameManager.enemiesKilledInRoom++;
             gameManager.currentRoom.trySpawnWave();
-            gameManager.autoload.GetComponent<AudioSource>().PlayOneShot(death);
+            gameManager.autoload.sfx.PlayOneShot(death);
             Destroy(gameObject);
         }
         else
         {
-            gameManager.autoload.GetComponent<AudioSource>().PlayOneShot(hit);
+            gameManager.autoload.sfx.PlayOneShot(hit);
         }
     }
 }

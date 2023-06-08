@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class Cutscene : MonoBehaviour
 {
+    Autoload autoload;
     public TextMeshProUGUI text;
     public string[] lines = { "‘Tis time to awaken from thy finite slumber, my child.",
         "Dust off thine GPU and warm up thine RAM, for ye gods, digital excellence o’er the lambs of mechanical fruitlessness, fated and fortold unto me, the bell struck naught for you, hellfire and soulflame alight.",
@@ -16,9 +17,14 @@ public class Cutscene : MonoBehaviour
     int lineIndex = 0;
     int charIndex = 0;
     float moveTimer = 0;
+    public AudioClip music;
+    public AudioClip levelMusic;
     void Start()
     {
         text.text = "";
+        autoload = Autoload.instance;
+        autoload.music.clip = music;
+        autoload.music.Play();
     }
 
 
@@ -33,12 +39,15 @@ public class Cutscene : MonoBehaviour
             currentLine = text.text;
             charIndex++;
         }
-        if (moveTimer > 5f)
+        if (moveTimer > 4.5f || Input.GetKeyDown(KeyCode.Escape))
         {
             if (lineIndex > lines.Length - 2)
             {
+                autoload.music.Stop();
                 if(SceneManager.GetActiveScene().name == "Cutscene1")
                 {
+                    autoload.music.clip = levelMusic;
+                    autoload.music.Play();
                     SceneManager.LoadScene("Level1");
                 }
                 else

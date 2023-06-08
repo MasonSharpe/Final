@@ -27,6 +27,10 @@ public class Orb : MonoBehaviour
     public float essence = 8;
     public bool hasControl = true;
     Vector2 freezePosition;
+    public AudioClip hitSound;
+    public AudioClip deathSound;
+    public AudioClip whishSound;
+    public AudioClip comboSound;
 
     private void Awake()
     {
@@ -80,6 +84,10 @@ public class Orb : MonoBehaviour
         }
         if (gameManager.comboLeft < 0)
         {
+            if (gameManager.combo > 2)
+            {
+                gameManager.autoload.sfx.PlayOneShot(comboSound, 2);
+            }
             gameManager.combo = 0;
         }
         if (Input.GetKeyDown(KeyCode.LeftControl))
@@ -110,8 +118,10 @@ public class Orb : MonoBehaviour
         }
         if ((Input.GetKeyDown(KeyCode.Space) || (Input.GetKey(KeyCode.Space) && !isConnected)) && hasControl)
         {
+            
             if (isConnected)
             {
+                gameManager.autoload.sfx.PlayOneShot(whishSound, 1.2f);
                 isConnected = false;
                 freezePosition = transform.position;
                 cc.enabled = true;
@@ -124,10 +134,11 @@ public class Orb : MonoBehaviour
                 Physics2D.IgnoreLayerCollision(7, 16, false);
 
             }
-            else
+            else if (!isConnected)
             {
                 if (pierceTimer <= 1)
                 {
+                    gameManager.autoload.sfx.PlayOneShot(whishSound, 1.2f);
                     Physics2D.IgnoreLayerCollision(7, 12, false);
                     Physics2D.IgnoreLayerCollision(7, 16, true);
                     isConnected = true;
@@ -171,6 +182,7 @@ public class Orb : MonoBehaviour
         if (collision.gameObject.tag == "Health")
         {
             health = 20;
+            gameManager.autoload.sfx.PlayOneShot(hitSound);
             gameManager.IncreaseCombo();
             Destroy(collision.gameObject);
         }
@@ -194,8 +206,10 @@ public class Orb : MonoBehaviour
             health -= amount;
             gameManager.comboLeft -= 2;
             invincTimer = 0.25f;
+            gameManager.autoload.sfx.PlayOneShot(hitSound);
             if (health <= 0)
             {
+                gameManager.autoload.sfx.PlayOneShot(deathSound, 2);
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name);
             }
         }

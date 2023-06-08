@@ -216,6 +216,7 @@ MonoBehaviour:
   - {fileID: 55045248063380163}
   - {fileID: 950632783779168273}
   - {fileID: 3365277666620355152}
+  roomClearSound: {fileID: 8300000, guid: 521f246443cd46d479dc4bf810a4e7bc, type: 3}
 --- !u!61 &2911861915761534050
 BoxCollider2D:
   m_ObjectHideFlags: 0

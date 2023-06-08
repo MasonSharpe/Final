@@ -1377,8 +1377,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 4.11969, y: -4.119812}
+  m_SizeDelta: {x: 28.0142, y: 24.7183}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &634334983
 MonoBehaviour:
@@ -1811,6 +1811,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelSelectPanel: {fileID: 634334981}
+  levelMusic: {fileID: 8300000, guid: 087a9f3487f2fcf499e2914e0a4dc86c, type: 3}
+  mainMusic: {fileID: 8300000, guid: cc6ff09394ce1674b886ba82d4c759da, type: 3}
 --- !u!1 &961801557
 GameObject:
   m_ObjectHideFlags: 0

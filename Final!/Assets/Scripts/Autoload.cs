@@ -15,6 +15,9 @@ public class Autoload : MonoBehaviour
     public int highestCombo = 0;
     public bool ranksVisible = false;
     public int[] levelRanks = {-1, -1, -1, -1, -1};
+    public AudioSource sfx;
+    public AudioSource music;
+    public AudioHighPassFilter filter;
 
     FileStream dataStream;
     BinaryFormatter converter = new BinaryFormatter();
@@ -40,7 +43,14 @@ public class Autoload : MonoBehaviour
     {
         if (gameManager != null)
         {
-            
+            if (gameManager.slowActive)
+            {
+                filter.cutoffFrequency = 1000;
+            }
+            else
+            {
+                filter.cutoffFrequency = 10;
+            }
         }
     }
 

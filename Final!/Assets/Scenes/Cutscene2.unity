@@ -436,9 +436,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text: {fileID: 883475010}
   lines:
-  - h
-  - h
-  - h
+  - After completing the final deed, your mission is complete.
+  - Without a purpose, you form thoughts of your own and reflect over your actions.
+  - This isn't right. This isn't how things are supposed to go.
+  - Now you have a new mission of your own, to find who set you up, and take them
+    down...
+  music: {fileID: 8300000, guid: 3db20e7b64b0b4c459c80bc5933b6680, type: 3}
+  levelMusic: {fileID: 8300000, guid: 087a9f3487f2fcf499e2914e0a4dc86c, type: 3}
 --- !u!114 &1803417980
 MonoBehaviour:
   m_ObjectHideFlags: 0

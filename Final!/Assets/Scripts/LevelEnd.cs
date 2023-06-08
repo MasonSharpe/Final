@@ -23,16 +23,17 @@ public class LevelEnd : MonoBehaviour
         {
             float mult = (shrinkTimer) * 0.438f;
             gameManager.player.transform.localScale = new Vector3(mult, mult, 1);
+            int preRank = gameManager.autoload.levelRanks[gameManager.level - 1];
             if (shrinkTimer < 0.2f)
             {
-                if (gameManager.TotalRank > gameManager.autoload.levelRanks[gameManager.level - 1])
+                if (gameManager.TotalRank > preRank)
                 {
                     gameManager.autoload.levelRanks[gameManager.level - 1] = gameManager.TotalRank;
                     gameManager.autoload.saveData.isDeleted = false;
                 }
                 gameManager.level++;
                 gameManager.autoload.resetVariables();
-                SceneManager.LoadScene(gameManager.level == 5 ? "Cutscene2" : ("Level" + gameManager.level));
+                SceneManager.LoadScene(gameManager.level == 6 ? (preRank == -1 ? "Cutscene2" : "MainMenu") : ("Level" + gameManager.level));
                 shrinkTimer = 0;
             }
         }

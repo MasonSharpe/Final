@@ -14,6 +14,7 @@ public class Room : MonoBehaviour
     int enemyIndex = 0;
     int enemiesLeftToSpawn = 0;
     int wave = 0;
+    public AudioClip roomClearSound;
     
 
     void Start()
@@ -31,6 +32,7 @@ public class Room : MonoBehaviour
         {
             enemies[enemyIndex].SetActive(true);
             enemiesLeftToSpawn--;
+            gameManager.autoload.sfx.PlayOneShot(roomClearSound);
             enemyIndex += 1;
             enemySpawnTimer = 1.4f;
         }
@@ -59,7 +61,7 @@ public class Room : MonoBehaviour
                     barriersToDestroy[i].SetActive(false);
                     gameManager.inRoom = false;
                     gameManager.enemiesKilledInRoom = 0;
-                    //gameManager.completedRooms.Add(gameObject);
+                    gameManager.autoload.sfx.PlayOneShot(roomClearSound);
                 }
             }
             else
