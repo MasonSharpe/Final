@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UI : MonoBehaviour
@@ -17,6 +18,8 @@ public class UI : MonoBehaviour
     public TextMeshProUGUI combo;
     public TextMeshProUGUI rank;
     public GameObject overlay;
+    public GameObject endPanel;
+    public TextMeshProUGUI endRank;
     Vector3 startingPanelPos;
     GameManager gameManager;
     string[] rankLetters = { "F", "D", "C", "B", "A", "S"};
@@ -63,5 +66,18 @@ public class UI : MonoBehaviour
         {
             overlay.SetActive(false);
         }
+    }
+
+    public void NextLevel()
+    {
+        SceneManager.LoadScene(gameManager.level == 6 ? (gameManager.autoload.levelRanks[gameManager.level - 2] == -1 ? "Cutscene2" : "MainMenu") : ("Level" + gameManager.level));
+        Time.timeScale = 1;
+    }
+
+    public void ShowPanel()
+    {
+        endRank.text = rankLetters[gameManager.TotalRank];
+        rankPanel.SetActive(false);
+        endPanel.SetActive(true);
     }
 }

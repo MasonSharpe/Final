@@ -87,4 +87,14 @@ public class MainMenu : MonoBehaviour
     {
         autoload.WriteFile();
     }
+
+    public void toggleSFX()
+    {
+        autoload.sfx.volume = autoload.sfx.volume == 1 ? 0 : 1;
+    }
+
+    public void toggleMusic()
+    {
+        autoload.music.volume = autoload.music.volume == 1 ? 0 : 1;
+    }
 }

@@ -31,6 +31,7 @@ public class Orb : MonoBehaviour
     public AudioClip deathSound;
     public AudioClip whishSound;
     public AudioClip comboSound;
+    public AudioClip checkpointSound;
 
     private void Awake()
     {
@@ -49,6 +50,7 @@ public class Orb : MonoBehaviour
         cameraRb = Camera.main.GetComponentInParent<Rigidbody2D>();
         Physics2D.IgnoreLayerCollision(7, 12, false);
         Physics2D.IgnoreLayerCollision(7, 16, true);
+        gameManager.autoload.sfx.PlayOneShot(hitSound);
     }
 
     // Update is called once per frame
@@ -149,7 +151,7 @@ public class Orb : MonoBehaviour
         }
         if (isConnected)
         {
-            mouseVelocity = ((Vector2)new Vector3(pos.x, pos.y, 0) - (Vector2)transform.position) * (gameManager.slowActive ? 0.1f : 1);
+            mouseVelocity = ((Vector2)new Vector3(pos.x, pos.y, 0) - (Vector2)transform.position) * (gameManager.slowActive ? 0.1f : 1) * 1.3f;
             rb.velocity = mouseVelocity * 1.1f;
         }
         if (!isConnected && remainingPierce > 0)
@@ -194,6 +196,7 @@ public class Orb : MonoBehaviour
         {
             gameManager.autoload.currentCheckpoint = collision.gameObject.transform.position;
             gameManager.autoload.completedRooms = gameManager.completedRooms;
+            gameManager.autoload.sfx.PlayOneShot(checkpointSound);
             Destroy(collision.gameObject);
         }
     }

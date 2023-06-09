@@ -63,7 +63,7 @@ public class Enemy : MonoBehaviour
         if (type.Contains("Elite"))
         {
             movementSpeed += 3;
-            health += 25;
+            health += 15;
             ogColor.b = 0;
         }
         if (type.Contains("Boss"))

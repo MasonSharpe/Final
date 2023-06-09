@@ -126,6 +126,7 @@ MonoBehaviour:
   deathSound: {fileID: 8300000, guid: 8f63684a115ee5a45a5c65ab02526eab, type: 3}
   whishSound: {fileID: 8300000, guid: bb57341037a0e124487ecb049e5f6cd4, type: 3}
   comboSound: {fileID: 8300000, guid: 88278f07fda673e4091d3447aea7ec5a, type: 3}
+  checkpointSound: {fileID: 8300000, guid: b3b22a09709a9f642a63af40cddae179, type: 3}
 --- !u!58 &7436076468676598177
 CircleCollider2D:
   m_ObjectHideFlags: 0

@@ -41,9 +41,9 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        TimeRank = autoload.levelTime == 0 ? 0 : 5 - (autoload.levelTime <= STime ? 0 : Mathf.Clamp((int)Mathf.Round((autoload.levelTime - STime) / (STime / 4f)), 0, 5));
+        TimeRank = autoload.levelTime == 0 ? 0 : 5 - (autoload.levelTime <= STime ? 0 : Mathf.Clamp((int)Mathf.Ceil((autoload.levelTime - STime) / (STime / 4f)), 0, 5));
         ComboRank = SCombo == 0 ? 5 : autoload.highestCombo == 0 ? 0 : autoload.highestCombo >= SCombo ? 5 : (int)Mathf.Round(autoload.highestCombo / (SCombo / 4f));
-        TotalRank = SCombo == 0 ? ComboRank : (int)Mathf.Floor((TimeRank + ComboRank) / 2);
+        TotalRank = SCombo == 0 ? TimeRank : (int)Mathf.Floor((TimeRank + ComboRank) / 2);
     }
 
     public void IncreaseCombo()

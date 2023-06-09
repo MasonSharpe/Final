@@ -7,7 +7,7 @@ public class LevelEnd : MonoBehaviour
 {
     GameManager gameManager;
     float shrinkTimer = 0;
-
+    public UI ui;
 
     
     void Start()
@@ -33,7 +33,8 @@ public class LevelEnd : MonoBehaviour
                 }
                 gameManager.level++;
                 gameManager.autoload.resetVariables();
-                SceneManager.LoadScene(gameManager.level == 6 ? (preRank == -1 ? "Cutscene2" : "MainMenu") : ("Level" + gameManager.level));
+                ui.ShowPanel();
+                Time.timeScale = 0;
                 shrinkTimer = 0;
             }
         }
