@@ -70,7 +70,7 @@ public class UI : MonoBehaviour
 
     public void NextLevel()
     {
-        SceneManager.LoadScene(gameManager.level == 6 ? (gameManager.autoload.levelRanks[gameManager.level - 2] == -1 ? "Cutscene2" : "MainMenu") : ("Level" + gameManager.level));
+        SceneManager.LoadScene(gameManager.level == 6 ? (gameManager.autoload.levelRanks[gameManager.level - 2] == -1 ? "MainMenu" : "Cutscene2") : ("Level" + gameManager.level));
         Time.timeScale = 1;
     }
 
