@@ -489,6 +489,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &156897063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -614,6 +626,18 @@ MonoBehaviour:
       - m_Target: {fileID: 892851702}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: resetTimes
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1650,6 +1674,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &793767368
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2085,6 +2121,7 @@ MonoBehaviour:
   levelSelectPanel: {fileID: 634334981}
   levelMusic: {fileID: 8300000, guid: 087a9f3487f2fcf499e2914e0a4dc86c, type: 3}
   mainMusic: {fileID: 8300000, guid: cc6ff09394ce1674b886ba82d4c759da, type: 3}
+  select: {fileID: 8300000, guid: 37068fec31448524bbc22f2c48c17e65, type: 3}
 --- !u!1 &961801557
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,6 +2354,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1038636300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2442,6 +2491,18 @@ MonoBehaviour:
       - m_Target: {fileID: 892851702}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: toggleSFX
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2846,6 +2907,18 @@ MonoBehaviour:
       - m_Target: {fileID: 892851702}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: openLevelSelect
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3395,6 +3468,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1266452686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3732,6 +3817,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1504804623
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4002,6 +4099,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1666786276
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4133,6 +4242,18 @@ MonoBehaviour:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 3
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -4483,6 +4604,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1931974804
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4617,6 +4750,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1967052197
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4742,6 +4887,18 @@ MonoBehaviour:
       - m_Target: {fileID: 892851702}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: toggleMusic
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 892851702}
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
+        m_MethodName: selectSound
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

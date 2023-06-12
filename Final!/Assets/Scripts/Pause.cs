@@ -7,6 +7,7 @@ public class Pause : MonoBehaviour
 {
     GameManager gameManager;
     public GameObject panel;
+    public AudioClip select;
     void Start()
     {
         panel.SetActive(false);
@@ -48,5 +49,9 @@ public class Pause : MonoBehaviour
         gameManager.autoload.currentCheckpoint = Vector3.zero;
         Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+    public void selectSound()
+    {
+        gameManager.autoload.sfx.PlayOneShot(select, 0.7f);
     }
 }

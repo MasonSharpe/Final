@@ -35,7 +35,8 @@ public class Autoload : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         resetVariables();
         instance = this;
-
+        sfx.volume = 0.7f;
+        music.volume = 0.7f;
     }
 
     // Update is called once per frame

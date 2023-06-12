@@ -11,6 +11,7 @@ public class MainMenu : MonoBehaviour
     string[] rankLetters = { "F", "D", "C", "B", "A", "S" };
     public AudioClip levelMusic;
     public AudioClip mainMusic;
+    public AudioClip select;
 
     void Start()
     {
@@ -90,11 +91,16 @@ public class MainMenu : MonoBehaviour
 
     public void toggleSFX()
     {
-        autoload.sfx.volume = autoload.sfx.volume == 1 ? 0 : 1;
+        autoload.sfx.volume = autoload.sfx.volume == 0.7f ? 0 : 0.7f;
     }
 
     public void toggleMusic()
     {
-        autoload.music.volume = autoload.music.volume == 1 ? 0 : 1;
+        autoload.music.volume = autoload.music.volume == 0.7f ? 0 : 0.7f;
+    }
+
+    public void selectSound()
+    {
+        autoload.sfx.PlayOneShot(select, 0.7f);
     }
 }
